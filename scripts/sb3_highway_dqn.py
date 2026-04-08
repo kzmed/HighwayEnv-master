@@ -25,19 +25,19 @@ if __name__ == "__main__":
         gradient_steps=1,
         target_update_interval=50,
         verbose=1,
-        tensorboard_log="../data/intersection_dqn/",
+        tensorboard_log="../data/highway_dqn/",
     )
 
 
     if TRAIN:
-        model.learn(total_timesteps=int(2e4))
-        model.save("../data/intersection_dqn/model")
+        model.learn(total_timesteps=int(1e4))
+        model.save("../data/highway_dqn/model")
         del model
 
 
-    model = DQN.load("../data/intersection_dqn/model", env=env)
+    model = DQN.load("../data/highway_dqn/model", env=env)
     env = RecordVideo(
-        env, video_folder="../data/intersection_dqn/videos", episode_trigger=lambda e: True
+        env, video_folder="../data/highway_dqn/videos", episode_trigger=lambda e: True
     )
     env.unwrapped.config["simulation_frequency"] = 15  # Higher FPS for rendering
     env.unwrapped.set_record_video_wrapper(env)
