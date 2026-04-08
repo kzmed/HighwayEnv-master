@@ -26,14 +26,14 @@ if __name__ == "__main__":
             learning_rate=5e-4,
             gamma=0.8,
             verbose=2,
-            tensorboard_log="highway_ppo/",
+            tensorboard_log="../data/highway_ppo/",
         )
         # Train the agent
-        model.learn(total_timesteps=int(2e4))
+        model.learn(total_timesteps=int(5e4))
         # Save the agent
-        model.save("highway_ppo/model")
+        model.save("../data/highway_ppo/model")
 
-    model = PPO.load("highway_ppo/model")
+    model = PPO.load("../data/highway_ppo/model")
     env = gym.make("highway-v0", render_mode="human")
     for _ in range(5):
         obs, info = env.reset()
@@ -42,3 +42,4 @@ if __name__ == "__main__":
             action, _ = model.predict(obs)
             obs, reward, done, truncated, info = env.step(action)
             env.render()
+
